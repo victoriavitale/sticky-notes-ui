@@ -6,12 +6,13 @@ class StickyNotesBoard extends Component {
     super(props);
 
     this.state = {
-      stickyNotes: []
+      stickyNotes: [],
+      disabled: true
     }
   }
 
   render() {
-    const stickyNotes = this.state.stickyNotes.map((stickyNote) => <StickyNote stickyNote={stickyNote}/>);
+    const stickyNotes = this.state.stickyNotes.map((stickyNote) => <StickyNote stickyNote={stickyNote} disabled={this.state.disabled}/>);
 
     return (
       <div>
@@ -23,10 +24,13 @@ class StickyNotesBoard extends Component {
     );
   }
 
-  addNewNote(){
-    var arrNotes = this.state.stickyNotes;
-    arrNotes.push({id: 1, title: 'New Note', content: ''})
-    this.setState({ stickyNotes: arrNotes})
+  addNewNote(e){
+    if(e.target.className == 'sticky-notes-container'){
+      var arrNotes = this.state.stickyNotes;
+      arrNotes.push({id: 1, title: 'New Note', content: ''})
+      this.setState({ stickyNotes: arrNotes})
+    }
+    this.setState({ disabled: true })
   }
 
 }
