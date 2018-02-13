@@ -6,7 +6,7 @@ class StickyNotesBoard extends Component {
     super(props);
 
     this.state = {
-      stickyNotes: [
+      notes: [
         {
           id:1,
           title: 'My title 1',
@@ -26,13 +26,13 @@ class StickyNotesBoard extends Component {
   }
 
   render() {
-    const stickyNotes = this.renderNotes();
+    const notes = this.renderNotes();
 
     return (
       <div>
         <div className="sticky-notes-container" onDoubleClick={this.createNote.bind(this)}>
           <p>Double click anywhere on the board to add a new note</p>
-          {stickyNotes}
+          {notes}
         </div>
       </div>
     );
@@ -40,7 +40,7 @@ class StickyNotesBoard extends Component {
 
   renderNotes(){
     return(
-      this.state.stickyNotes.map((stickyNote) => <StickyNote stickyNote={stickyNote} disabled={this.state.disabled} onDuplicateNote={this.duplicateNote.bind(this)}/>)
+      this.state.notes.map((note) => <StickyNote key={note.id} note={note} disabled={this.state.disabled} onDuplicateNote={this.duplicateNote.bind(this)}/>)
     )
   }
 
@@ -53,16 +53,20 @@ class StickyNotesBoard extends Component {
 
   duplicateNote(note){
     this.addNote(note);
+    console.log(this.state.notes)
   }
 
   addNote(note){
-    var arrNotes = this.state.stickyNotes;
-    if(note != undefined){
-      arrNotes.push({id: note.id + 1, title: note.title, content: note.content})
-    }else{
-      arrNotes.push({id: arrNotes.length + 1, title: 'New Note', content: ''})
+    var arrNotes = this.state.notes;
+    var newID = arrNotes.length + 1;
+    if(note == undefined){
+      note = {
+        title: "New Note",
+        content: ''
+      }
     }
-    this.setState({ stickyNotes: arrNotes })
+    arrNotes.push({id: newID, title: note.title, content: note.content})
+    this.setState({ notes: arrNotes })
   }
 
 }

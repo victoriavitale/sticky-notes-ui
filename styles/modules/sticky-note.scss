@@ -22,6 +22,19 @@
         color: $primary-text-light;
     }
 
+    input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: $primary-text-light;
+        font-size: 18px;
+        font-weight: bold;
+
+        &:focus{
+            outline: 0;
+        }
+    }
+
     textarea{
         position: relative;
         width:100%;

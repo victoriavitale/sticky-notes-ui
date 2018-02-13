@@ -6,7 +6,7 @@ class StickyNote extends Component {
     super(props);
 
     this.state = {
-      stickyNote : this.props.stickyNote,
+      note : this.props.note,
       selected: false,
       disabled: this.props.disabled,
       duplicatedNote: {}
@@ -22,11 +22,30 @@ class StickyNote extends Component {
             onDoubleClick={this.editNote.bind(this)}
             onKeyDown={this.handleKeyDown.bind(this)}
             tabIndex="0">
-              <h3>{this.state.stickyNote.title}</h3>
-              <textarea disabled={this.state.disabled} placeholder="Double click on a note to edit it" ref="noteContent">{this.props.stickyNote.content}</textarea>
+              <input 
+                type="text" 
+                value={this.state.note.title} 
+                onChange={this.onTitleChange.bind(this)}/>
+              <textarea
+                value={this.state.note.content}
+                onChange={this.onContentChange.bind(this)}
+                disabled={this.state.disabled} 
+                placeholder="Double click on a note to edit it" 
+                ref="noteContent">
+              </textarea>
           </div>
       </div>
     );
+  }
+
+  onContentChange(e){
+    this.state.note.content = e.target.value
+    this.setState({note: this.state.note});
+  }
+
+  onTitleChange(e){
+    this.state.note.title = e.target.value
+    this.setState({note: this.state.note});
   }
 
   toggleSelect(e){
@@ -51,7 +70,7 @@ class StickyNote extends Component {
 
     //Listening for Cmd key
     if(e.metaKey && charCode === 'c') {
-      this.state.duplicatedNote = this.state.stickyNote;
+      this.state.duplicatedNote = this.state.note;
     }
 
     if(e.metaKey && charCode === 'v') {
@@ -63,7 +82,7 @@ class StickyNote extends Component {
 
     //Listening for Ctrl key
     if(e.ctrlKey && charCode === 'c') {
-      this.state.duplicatedNote = this.state.stickyNote;
+      this.state.duplicatedNote = this.state.note;
     }
 
     if(e.ctrlKey && charCode === 'v') {
