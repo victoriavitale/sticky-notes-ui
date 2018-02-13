@@ -7,24 +7,57 @@ class StickyNote extends Component {
 
     this.state = {
       stickyNote : this.props.stickyNote,
-      selected: false
+      selected: false,
+      disabled: this.props.disabled
     }
   }
 
   render() {
     return (
       <div>
-          <div className={"sticky-note" + (this.state.selected ? ' selected' : '')} onClick={this.toggleSelect.bind(this)}>
-            <h3>{this.state.stickyNote.title}</h3>
-            <textarea placeholder="Double click on a note to edit it">{this.props.stickyNote.content}</textarea>
+          <div 
+            className={"sticky-note" + (this.state.selected ? ' selected' : '')} 
+            onClick={this.toggleSelect.bind(this)} 
+            onDoubleClick={this.editNote.bind(this)}
+            onKeyDown={this.handleKeyDown.bind(this)}
+            tabIndex="0">
+              <h3>{this.state.stickyNote.title}</h3>
+              <textarea disabled={this.state.disabled} placeholder="Double click on a note to edit it" ref="noteContent">{this.props.stickyNote.content}</textarea>
           </div>
       </div>
     );
   }
 
-  toggleSelect(){
+  toggleSelect(e){
     var inverseSelected = !this.state.selected
-    this.setState({ selected: inverseSelected})
+    this.setState({ selected: inverseSelected })
+    if(e.shiftKey){
+      console.log('shift key is pressed')
+    }
+  }
+
+  editNote(){
+    this.setState({ disabled: false })
+    this.refs.noteContent.focus();
+  }
+
+  handleKeyDown(e){
+    let charCode = String.fromCharCode(e.which).toLowerCase();
+
+    //Listening for Cmd key
+    if(e.metaKey && charCode === 'c') {
+      console.log("Cmd + C pressed");
+    }else if(e.metaKey && charCode === 'v') {
+      console.log("Cmd + V pressed");
+    }
+
+    //Listening for Ctrl key
+    if(e.ctrlKey && charCode === 'c') {
+      console.log("Ctrl + C pressed");
+    } else if(e.ctrlKey && charCode === 'v') {
+      console.log("Ctrl + V pressed");
+    }
+
   }
 }
 
