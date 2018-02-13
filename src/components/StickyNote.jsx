@@ -7,7 +7,6 @@ class StickyNote extends Component {
 
     this.state = {
       note : this.props.note,
-      selected: false,
       disabled: this.props.disabled,
       duplicatedNote: {}
     }
@@ -17,7 +16,7 @@ class StickyNote extends Component {
     return (
       <div>
           <div 
-            className={"sticky-note" + (this.state.selected ? ' selected' : '')} 
+            className={"sticky-note" + (this.state.note.selected ? ' selected' : '')} 
             onClick={this.toggleSelect.bind(this)} 
             onDoubleClick={this.editNote.bind(this)}
             onKeyDown={this.handleKeyDown.bind(this)}
@@ -49,10 +48,11 @@ class StickyNote extends Component {
   }
 
   toggleSelect(e){
-    var inverseSelected = !this.state.selected
-    this.setState({ selected: inverseSelected })
+    this.state.note.selected = !this.state.note.selected
+    this.setState({ note: this.state.note })
+    
     if(e.shiftKey){
-      console.log('shift key is pressed')
+      this.props.onNoteSelect(this.state.note);
     }
   }
 

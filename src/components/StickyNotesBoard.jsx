@@ -10,15 +10,18 @@ class StickyNotesBoard extends Component {
         {
           id:1,
           title: 'My title 1',
-          content:'My content 1'
+          content:'My content 1',
+          selected: false
         },{
           id:2,
           title: 'My title 2',
-          content:'My content 2'
+          content:'My content 2',
+          selected: true
         },{
           id:3,
           title: 'My title 3',
-          content:'My content 3'
+          content:'My content 3',
+          selected:true
         }
       ],
       disabled: true
@@ -40,7 +43,14 @@ class StickyNotesBoard extends Component {
 
   renderNotes(){
     return(
-      this.state.notes.map((note) => <StickyNote key={note.id} note={note} disabled={this.state.disabled} onDuplicateNote={this.duplicateNote.bind(this)}/>)
+      this.state.notes.map((note) => 
+      <StickyNote 
+        key={note.id} 
+        note={note} 
+        disabled={this.state.disabled} 
+        onDuplicateNote={this.duplicateNote.bind(this)}
+        onNoteSelect={this.toggleNotesSelection.bind(this)}
+      />)
     )
   }
 
@@ -57,16 +67,24 @@ class StickyNotesBoard extends Component {
   }
 
   addNote(note){
-    var arrNotes = this.state.notes;
-    var newID = arrNotes.length + 1;
+    var newNotesList = this.state.notes;
+    var newID = newNotesList.length + 1;
     if(note == undefined){
       note = {
         title: "New Note",
         content: ''
       }
     }
-    arrNotes.push({id: newID, title: note.title, content: note.content})
-    this.setState({ notes: arrNotes })
+    newNotesList.push({id: newID, title: note.title, content: note.content})
+    this.setState({ notes: newNotesList })
+  }
+
+  toggleNotesSelection(note){
+    var noteIndex = this.state.notes.indexOf(note);
+    this.state.notes[noteIndex].selected = note.selected;
+
+    console.log(this.state.notes);
+
   }
 
 }
