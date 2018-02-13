@@ -8,7 +8,8 @@ class StickyNote extends Component {
     this.state = {
       stickyNote : this.props.stickyNote,
       selected: false,
-      disabled: this.props.disabled
+      disabled: this.props.disabled,
+      duplicatedNote: {}
     }
   }
 
@@ -41,23 +42,36 @@ class StickyNote extends Component {
     this.refs.noteContent.focus();
   }
 
+  duplicateNote(note){
+    this.props.onDuplicateNote(note);
+  }
+
   handleKeyDown(e){
     let charCode = String.fromCharCode(e.which).toLowerCase();
 
     //Listening for Cmd key
     if(e.metaKey && charCode === 'c') {
-      console.log("Cmd + C pressed");
-    }else if(e.metaKey && charCode === 'v') {
-      console.log("Cmd + V pressed");
+      this.state.duplicatedNote = this.state.stickyNote;
+    }
+
+    if(e.metaKey && charCode === 'v') {
+      if(this.state.duplicatedNote != undefined) {
+        this.duplicateNote(this.state.duplicatedNote);
+      }
+
     }
 
     //Listening for Ctrl key
     if(e.ctrlKey && charCode === 'c') {
-      console.log("Ctrl + C pressed");
-    } else if(e.ctrlKey && charCode === 'v') {
-      console.log("Ctrl + V pressed");
+      this.state.duplicatedNote = this.state.stickyNote;
     }
 
+    if(e.ctrlKey && charCode === 'v') {
+      if(this.state.duplicatedNote != undefined) {
+        this.duplicateNote(this.state.duplicatedNote);
+      }
+
+    }
   }
 }
 
