@@ -1,5 +1,5 @@
 .board-header{
-    background-color: #c8b900;
+    background-color: $dark-yellow;
     height: 60px;
     padding: 10px;
 
@@ -10,7 +10,7 @@
         padding-top: 10px;
         padding-left: 30px;
         text-decoration: none;
-        color: white;
+        color: $primary-text-light;
     }
 }
 
