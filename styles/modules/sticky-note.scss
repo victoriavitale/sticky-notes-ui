@@ -12,9 +12,12 @@
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     }
 
+    &:focus{
+        outline:0;
+    }
+    
     &.selected{
         border: 4px solid $light-gray;
-        
     }
 
     input {
@@ -43,6 +46,9 @@
 
         &::placeholder{
             color: $light-gray;
+            font-weight: lighter;
+            font-size: 14px;
+            font-style: italic;
         }
 
         &:focus{
