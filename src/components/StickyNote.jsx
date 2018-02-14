@@ -73,27 +73,27 @@ class StickyNote extends Component {
     let charCode = String.fromCharCode(e.which).toLowerCase();
 
     //Listening for Cmd key
-    if(e.metaKey && charCode === 'c') {
-      this.state.duplicatedNote = this.state.note;
-    }
-
-    if(e.metaKey && charCode === 'v') {
-      if(this.state.duplicatedNote != undefined) {
-        this.duplicateNote(this.state.duplicatedNote);
+    if(this.state.isFormDisabled){
+      if(e.metaKey && charCode === 'c') {
+        this.state.duplicatedNote = this.state.note;
+      }
+  
+      if(e.metaKey && charCode === 'v') {
+        if(this.state.duplicatedNote != undefined) {
+          this.duplicateNote(this.state.duplicatedNote);
+        }
       }
 
-    }
-
-    //Listening for Ctrl key
-    if(e.ctrlKey && charCode === 'c') {
-      this.state.duplicatedNote = this.state.note;
-    }
-
-    if(e.ctrlKey && charCode === 'v') {
-      if(this.state.duplicatedNote != undefined) {
-        this.duplicateNote(this.state.duplicatedNote);
+      //Listening for Ctrl key
+      if(e.ctrlKey && charCode === 'c') {
+        this.state.duplicatedNote = this.state.note;
       }
 
+      if(e.ctrlKey && charCode === 'v') {
+        if(this.state.duplicatedNote != undefined) {
+          this.duplicateNote(this.state.duplicatedNote);
+        }
+      }
     }
   }
 }
