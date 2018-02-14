@@ -23,8 +23,7 @@ class StickyNotesBoard extends Component {
           content:'My content 3',
           selected: false
         }
-      ],
-      disabled: true
+      ]
     }
   }
 
@@ -47,7 +46,6 @@ class StickyNotesBoard extends Component {
       <StickyNote 
         key={note.id} 
         note={note} 
-        disabled={this.state.disabled} 
         onDuplicateNote={this.duplicateNote.bind(this)}
         onNoteSelect={this.toggleNotesSelection.bind(this)}
       />)
@@ -58,7 +56,6 @@ class StickyNotesBoard extends Component {
     if(e.target.className == 'sticky-notes-container'){
       this.addNote();
     }
-    this.setState({ disabled: true })
   }
 
   duplicateNote(note){

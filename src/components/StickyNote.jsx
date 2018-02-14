@@ -7,7 +7,7 @@ class StickyNote extends Component {
 
     this.state = {
       note : this.props.note,
-      disabled: this.props.disabled,
+      isFormDisabled: true,
       duplicatedNote: {}
     }
   }
@@ -24,13 +24,16 @@ class StickyNote extends Component {
               <input 
                 type="text" 
                 value={this.state.note.title} 
-                onChange={this.onTitleChange.bind(this)}/>
+                onChange={this.onTitleChange.bind(this)}
+                disabled={this.state.isFormDisabled}
+                onBlur={this.disableForm.bind(this)}/>
               <textarea
                 value={this.state.note.content}
                 onChange={this.onContentChange.bind(this)}
-                disabled={this.state.disabled} 
+                disabled={this.state.isFormDisabled} 
                 placeholder="Double click on a note to edit it" 
-                ref="noteContent">
+                ref="noteContent"
+                onBlur={this.disableForm.bind(this)}>
               </textarea>
           </div>
       </div>
@@ -54,8 +57,12 @@ class StickyNote extends Component {
   }
 
   editNote(){
-    this.setState({ disabled: false })
+    this.setState({ isFormDisabled: false })
     this.refs.noteContent.focus();
+  }
+
+  disableForm(){
+    this.setState({ isFormDisabled: true })
   }
 
   duplicateNote(note){
