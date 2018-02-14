@@ -6,24 +6,7 @@ class StickyNotesBoard extends Component {
     super(props);
 
     this.state = {
-      notes: [
-        {
-          id:1,
-          title: 'My title 1',
-          content:'My content 1',
-          selected: false
-        },{
-          id:2,
-          title: 'My title 2',
-          content:'My content 2',
-          selected: false
-        },{
-          id:3,
-          title: 'My title 3',
-          content:'My content 3',
-          selected: false
-        }
-      ]
+      notes: []
     }
   }
 
@@ -67,7 +50,7 @@ class StickyNotesBoard extends Component {
     var newID = newNotesList.length + 1;
     if(note == undefined){
       note = {
-        title: "New Note",
+        title: '',
         content: ''
       }
     }

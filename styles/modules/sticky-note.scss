@@ -28,6 +28,10 @@
         font-size: 18px;
         font-weight: bold;
 
+        &::placeholder{
+            color: $light-gray;
+        }
+
         &:focus{
             outline: 0;
         }

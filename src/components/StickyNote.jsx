@@ -26,7 +26,8 @@ class StickyNote extends Component {
                 value={this.state.note.title} 
                 onChange={this.onTitleChange.bind(this)}
                 disabled={this.state.isFormDisabled}
-                onBlur={this.disableForm.bind(this)}/>
+                onBlur={this.disableForm.bind(this)}
+                placeholder="New Note"/>
               <textarea
                 value={this.state.note.content}
                 onChange={this.onContentChange.bind(this)}
