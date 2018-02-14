@@ -16,12 +16,12 @@ class StickyNotesBoard extends Component {
           id:2,
           title: 'My title 2',
           content:'My content 2',
-          selected: true
+          selected: false
         },{
           id:3,
           title: 'My title 3',
           content:'My content 3',
-          selected:true
+          selected: false
         }
       ],
       disabled: true
@@ -63,7 +63,6 @@ class StickyNotesBoard extends Component {
 
   duplicateNote(note){
     this.addNote(note);
-    console.log(this.state.notes)
   }
 
   addNote(note){
@@ -79,12 +78,22 @@ class StickyNotesBoard extends Component {
     this.setState({ notes: newNotesList })
   }
 
-  toggleNotesSelection(note){
-    var noteIndex = this.state.notes.indexOf(note);
-    this.state.notes[noteIndex].selected = note.selected;
+  toggleNotesSelection(selectedNote, isShiftPressed){
+    if(!isShiftPressed){
+      this.clearNotesSelection(selectedNote);
+    }else{
+      var noteIndex = this.state.notes.indexOf(selectedNote);
+      this.state.notes[noteIndex].selected = selectedNote.selected;
+    }
+  }
 
-    console.log(this.state.notes);
-
+  clearNotesSelection(selectedNote){
+    this.state.notes.map((note) => {
+        if (note != selectedNote) {
+          note.selected = false
+        }
+      })
+      this.setState({notes: this.state.notes})
   }
 
 }

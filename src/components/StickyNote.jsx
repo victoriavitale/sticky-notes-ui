@@ -50,10 +50,7 @@ class StickyNote extends Component {
   toggleSelect(e){
     this.state.note.selected = !this.state.note.selected
     this.setState({ note: this.state.note })
-    
-    if(e.shiftKey){
-      this.props.onNoteSelect(this.state.note);
-    }
+    this.props.onNoteSelect(this.state.note, e.shiftKey);
   }
 
   editNote(){
