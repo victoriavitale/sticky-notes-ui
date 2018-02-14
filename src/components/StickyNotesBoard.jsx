@@ -25,19 +25,20 @@ class StickyNotesBoard extends Component {
 
   renderNotes(){
     return(
-      this.state.notes.map((note) => 
+      this.state.notes.map((note) =>
       <StickyNote 
         key={note.id} 
         note={note} 
         onDuplicateNote={this.duplicateNote.bind(this)}
-        onNoteSelect={this.toggleNotesSelection.bind(this)}
+        onNoteSelect={this.updateNotesSelection.bind(this)}
       />)
     )
   }
 
   createNote(e){
+    var newNote = { title: '', content: '' }
     if(e.target.className == 'sticky-notes-container'){
-      this.addNote();
+      this.addNote(newNote);
     }
   }
 
@@ -48,17 +49,11 @@ class StickyNotesBoard extends Component {
   addNote(note){
     var newNotesList = this.state.notes;
     var newID = newNotesList.length + 1;
-    if(note == undefined){
-      note = {
-        title: '',
-        content: ''
-      }
-    }
-    newNotesList.push({id: newID, title: note.title, content: note.content})
+    newNotesList.push({ id: newID, title: note.title, content: note.content })
     this.setState({ notes: newNotesList })
   }
 
-  toggleNotesSelection(selectedNote, isShiftPressed){
+  updateNotesSelection(selectedNote, isShiftPressed){
     if(!isShiftPressed){
       this.clearNotesSelection(selectedNote);
     }else{
@@ -73,7 +68,7 @@ class StickyNotesBoard extends Component {
           note.selected = false
         }
       })
-      this.setState({notes: this.state.notes})
+      this.setState({ notes: this.state.notes })
   }
 
 }

@@ -1,12 +1,11 @@
 import React, {Component} from 'react'; 
 
 class StickyNote extends Component {
-
   constructor(props){
     super(props);
 
     this.state = {
-      note : this.props.note,
+      note: this.props.note,
       isFormDisabled: true,
       duplicatedNote: {}
     }
@@ -43,12 +42,12 @@ class StickyNote extends Component {
 
   onContentChange(e){
     this.state.note.content = e.target.value
-    this.setState({note: this.state.note});
+    this.setState({ note: this.state.note });
   }
 
   onTitleChange(e){
     this.state.note.title = e.target.value
-    this.setState({note: this.state.note});
+    this.setState({ note: this.state.note });
   }
 
   toggleSelect(e){
@@ -57,13 +56,13 @@ class StickyNote extends Component {
     this.props.onNoteSelect(this.state.note, e.shiftKey);
   }
 
+  disableForm(){
+    this.setState({ isFormDisabled: true })
+  }
+
   editNote(){
     this.setState({ isFormDisabled: false })
     this.refs.noteContent.focus();
-  }
-
-  disableForm(){
-    this.setState({ isFormDisabled: true })
   }
 
   duplicateNote(note){
@@ -73,8 +72,8 @@ class StickyNote extends Component {
   handleKeyDown(e){
     let charCode = String.fromCharCode(e.which).toLowerCase();
 
-    //Listening for Cmd key
     if(this.state.isFormDisabled){
+      //Listening for Cmd key
       if(e.metaKey && charCode === 'c') {
         this.state.duplicatedNote = this.state.note;
       }
