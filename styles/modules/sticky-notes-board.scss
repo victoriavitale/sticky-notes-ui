@@ -1,11 +1,11 @@
 .sticky-notes-container{
-    padding: 2em;
-    overflow: hidden;
     min-height:100vh;
-    
+    overflow: hidden;
+    padding: 2em;
+
     p {
-        text-align: center;
         color: $middle-gray;
+        text-align: center;
         user-select: none;
     }
 }

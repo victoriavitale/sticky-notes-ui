@@ -1,12 +1,12 @@
 .sticky-note{
     width:280px;
     height: 220px;
-    background-color: $primary-color;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    padding: 20px;
     float: left;
-    margin: 10px;
+    background-color: $primary-color;
     box-sizing: border-box;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    margin: 10px;
+    padding: 20px;
 
     &:hover{
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
@@ -27,32 +27,29 @@
         color: $primary-text-light;
         font-size: 18px;
         font-weight: bold;
-
-        &::placeholder{
-            color: $light-gray;
-        }
-
-        &:focus{
-            outline: 0;
-        }
     }
 
     textarea{
-        position: relative;
         width:100%;
         height:80%;
-        box-sizing: border-box;
+        position: relative;
         background-color: $primary-color;
+        box-sizing: border-box;
         border:none;
         resize: none;
         color: $secondary-text-light;
         font-size: 15px;
 
         &::placeholder{
-            color: $light-gray;
-            font-weight: lighter;
             font-size: 14px;
+            font-weight: lighter;
             font-style: italic;
+        }
+    }
+
+    input, textarea {
+        &::placeholder{
+            color: $light-gray;
         }
 
         &:focus{
