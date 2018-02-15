@@ -15,7 +15,7 @@ class StickyNotesBoard extends Component {
 
     return (
       <div>
-        <div className="sticky-notes-container" onDoubleClick={this.createNote.bind(this)}>
+        <div className="sticky-notes-container" onDoubleClick={this.addNewNote.bind(this)}>
           <p>Double click anywhere on the board to add a new note</p>
           {notes}
         </div>
@@ -23,6 +23,7 @@ class StickyNotesBoard extends Component {
     );
   }
 
+  //Render each item in notes list as a Sticky Note
   renderNotes(){
     return(
       this.state.notes.map((note) =>
@@ -35,29 +36,31 @@ class StickyNotesBoard extends Component {
     )
   }
 
-  createNote(e){
-    var newNote = { title: '', content: '' }
+  //Adding new and duplicated notes
+  addNewNote(e){
+    const newNote = { title: '', content: '' }
     if(e.target.className == 'sticky-notes-container'){
       this.addNote(newNote);
     }
   }
 
-  duplicateNote(note){
-    this.addNote(note);
+  duplicateNote(noteToDuplicate){
+    this.addNote(noteToDuplicate);
   }
 
   addNote(note){
-    var newNotesList = this.state.notes;
-    var newID = newNotesList.length + 1;
+    const newNotesList = this.state.notes;
+    const newID = newNotesList.length + 1;
     newNotesList.push({ id: newID, title: note.title, content: note.content })
     this.setState({ notes: newNotesList })
   }
 
+  //Handling notes selection
   updateNotesSelection(selectedNote, isShiftPressed){
     if(!isShiftPressed){
       this.clearNotesSelection(selectedNote);
     }else{
-      var noteIndex = this.state.notes.indexOf(selectedNote);
+      const noteIndex = this.state.notes.indexOf(selectedNote);
       this.state.notes[noteIndex].selected = selectedNote.selected;
     }
   }

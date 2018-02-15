@@ -17,7 +17,7 @@ class StickyNote extends Component {
           <div 
             className={"sticky-note" + (this.state.note.selected ? ' selected' : '')} 
             onClick={this.toggleSelect.bind(this)} 
-            onDoubleClick={this.editNote.bind(this)}
+            onDoubleClick={this.enableForm.bind(this)}
             onKeyDown={this.handleKeyDown.bind(this)}
             tabIndex="0">
               <input 
@@ -40,6 +40,7 @@ class StickyNote extends Component {
     );
   }
 
+  //Note form data update
   onContentChange(e){
     this.state.note.content = e.target.value
     this.setState({ note: this.state.note });
@@ -50,25 +51,24 @@ class StickyNote extends Component {
     this.setState({ note: this.state.note });
   }
 
+  //Handling note selection
   toggleSelect(e){
     this.state.note.selected = !this.state.note.selected
     this.setState({ note: this.state.note })
     this.props.onNoteSelect(this.state.note, e.shiftKey);
   }
 
+  //Enable/Disable form to edit note
   disableForm(){
     this.setState({ isFormDisabled: true })
   }
 
-  editNote(){
+  enableForm(){
     this.setState({ isFormDisabled: false })
     this.refs.noteContent.focus();
   }
 
-  duplicateNote(note){
-    this.props.onDuplicateNote(note);
-  }
-
+  // Copying notes on Ctrl/Cmd + C and duplicating on Ctrl/Cmd + V, only if note is not being edited
   handleKeyDown(e){
     let charCode = String.fromCharCode(e.which).toLowerCase();
 
@@ -95,6 +95,10 @@ class StickyNote extends Component {
         }
       }
     }
+  }
+
+  duplicateNote(note){
+    this.props.onDuplicateNote(note);
   }
 }
 
