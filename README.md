@@ -30,8 +30,7 @@ git clone git@github.com:victoriavitale/sticky-notes-ui.git
 ```
 
 ## Install dependencies
-Once inside the cloned repository install dependencies
-Run the following command in your console:
+Once inside the cloned repository install dependencies by running the following command in your console:
 
 ```
 npm install
