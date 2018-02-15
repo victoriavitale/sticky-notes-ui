@@ -22,13 +22,13 @@ class StickyNote extends Component {
             tabIndex="0">
               <input 
                 type="text" 
-                value={this.state.note.title} 
+                value={this.state.note.data.title} 
                 onChange={this.onTitleChange.bind(this)}
                 disabled={this.state.isFormDisabled}
                 onBlur={this.disableForm.bind(this)}
                 placeholder="New Note"/>
               <textarea
-                value={this.state.note.content}
+                value={this.state.note.data.content}
                 onChange={this.onContentChange.bind(this)}
                 disabled={this.state.isFormDisabled} 
                 placeholder="Double click on a note to edit it" 
@@ -42,12 +42,12 @@ class StickyNote extends Component {
 
   //Note form data update
   onContentChange(e){
-    this.state.note.content = e.target.value
+    this.state.note.data.content = e.target.value
     this.setState({ note: this.state.note });
   }
 
   onTitleChange(e){
-    this.state.note.title = e.target.value
+    this.state.note.data.title = e.target.value
     this.setState({ note: this.state.note });
   }
 
